@@ -1,161 +1,63 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forfait de base - Tarification</title>
-    <style>
-        :root {
-            --btn-bg: blue;
-            --btn-bg-hover: darkblue;
-            --btn-text: #fff;
-        }
+<style>
+.pricing {
+width: 300px;
+margin: auto;
+background-color: #fff;
+box-shdow: 0 0 10px #ccc;
+padding: 10px;
+text-align: left;
+}
 
-        .pricing {
-            width: 100%;
-            max-width: 360px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px #ccc;
-            padding: 16px;
-            text-align: left;
-            border-radius: 8px;
-        }
+.title {
+font-size: 22px;
+font-weight: bold;
+}
 
-        .title {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 0 0 8px 0;
-        }
+.price {
+font-size: 18px;
+color: green;
+}
 
-        .price {
-            font-size: 18px;
-            color: green;
-            margin: 0 0 12px 0;
-        }
+.features {
+list-style: none;
+padding-left: 0;
+}
 
-        .features {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-        }
+.features li {
+padding: 4px;
+border-bottom: 1px solid #eee;
+}
 
-        .features li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
+.btn {
+background: blue;
+color: white;
+padding: 10px 20px;
+border: none;
+margin-top: 10px;
+}
 
-        .btn {
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            padding: 12px 20px;
-            border: none;
-            margin-top: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            line-height: 1;
-            transition: background-color 120ms ease-in-out, box-shadow 120ms ease-in-out;
-        }
-
-        .btn:hover {
-            background: var(--btn-bg-hover);
-        }
-
-        .btn:focus-visible {
-            outline: 3px solid rgba(0, 94, 255, 0.35);
-            outline-offset: 2px;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Responsivité */
-        @media (max-width: 480px) {
-            .pricing {
-                margin: 12px auto;
-                padding: 12px;
-            }
-            .title { font-size: 20px; }
-            .price { font-size: 16px; }
-            .btn { width: 100%; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .btn { transition: none; }
-        }
-    </style>
+.btn:hover {
+background: darkblue;
+}
+</style>
 </head>
 <body>
 
 <div class="pricing">
-    <h2 class="title">Forfait de base</h2>
-    <p class="price">9,99 $/mois</p>
+<h2 class="title">Forfait de base<h2>
+<p class="price">9,99 $/mois</p>
 
-    <ul class="features">
-        <li>1 Go de stockage</li>
-        <li>Assistance de base</li>
-        <li>Toutes les fonctionnalités principales</li>
-    </ul>
+<ul class="features">
+<li>1 Go de stockage</li>
+<li>Assistance de base</li>
+<li>Toutes les fonctionnalités principales</li>
+</ul>
 
-    <button class="btn" aria-label="Démarrer l'essai">Démarrer l'essai</button>
+<button class="btn">Démarrer l'essai</button>
 </div>
-
-<script type="module">
-    // Composant de bouton réutilisable
-    function createButton({ text, onClick, variant = 'primary', fullWidth = false, ariaLabel }) {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = `btn ${variant}`.trim();
-        button.textContent = text ?? '';
-        if (ariaLabel) button.setAttribute('aria-label', ariaLabel);
-        if (typeof onClick === 'function') {
-            button.addEventListener('click', onClick);
-        }
-        if (fullWidth) {
-            button.style.width = '100%';
-        }
-        // Accessibilité clavier: activer avec Espace
-        button.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                button.click();
-            }
-        });
-        return button;
-    }
-
-    // Rendre les boutons existants actifs
-    function wireExistingButtons() {
-        const buttons = document.querySelectorAll('.btn');
-        buttons.forEach((btn) => {
-            if (btn.dataset.wired === 'true') return;
-            btn.addEventListener('click', () => {
-                // Action par défaut : démarrer l'essai
-                alert("Essai démarré !");
-            });
-            btn.dataset.wired = 'true';
-        });
-    }
-
-    // Exposer le composant pour une réutilisation future
-    window.UI = { createButton };
-
-    // Initialisation
-    document.addEventListener('DOMContentLoaded', () => {
-        wireExistingButtons();
-        // Exemple (commenté) d'utilisation du composant :
-        // const container = document.querySelector('.pricing');
-        // const newBtn = createButton({
-        //     text: 'Acheter maintenant',
-        //     onClick: () => console.log('Achat cliqué'),
-        //     fullWidth: true,
-        //     ariaLabel: 'Acheter maintenant'
-        // });
-        // container.appendChild(newBtn);
-    });
-</script>
 
 </body>
 </html>
